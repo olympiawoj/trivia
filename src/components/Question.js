@@ -1,14 +1,16 @@
 import React from 'react';
+import shuffle from 'lodash.shuffle'
 
-const sampleAnswers = ['One', 'Two', 'Three', 'Four'];
+export default function Question({question}) {
 
-export default function Question() {
+  const answers = shuffle([...question.incorrect_answers, question.correct_answer])
+
   return (
     <div className="question">
-      <h2>Question Here</h2>
+      <h2 dangerouslySetInnerHTML={{__html:question.question}}/>
 
-      {sampleAnswers.map((answer, index) => (
-        <button key={index}>answer</button>
+      {answers.map((answer, index) => (
+        <button key={index}>{answer}</button>
       ))}
     </div>
   );
